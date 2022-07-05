@@ -1,0 +1,45 @@
+/******************************************************************************
+
+                            Online C# Compiler.
+                Code, Compile, Run and Debug C# program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+using System;
+using System.XML.Serialization;
+using System.Collection.Generic;
+class CheckDocument {
+    
+    private string[] text;
+  private string fileName;
+  private List<Words> words;
+  
+  public int count { get {return words.count}}
+  
+  public TrueFalseDataBase (string fileName) {
+      this.fileName = fileName;
+      words = new List<Words>();
+  }
+  
+  public void Load () {
+    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Words>));
+    FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+    words = (List<Words>)xmlSerializer.Deserialize(fileStream);
+  }
+  
+
+  
+  
+  static void Main() {
+        
+        OpenFileDialog dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                dataBase = new TrueFalseDataBase(dlg.FileName);
+                dataBase.Load();
+            }
+        
+    
+  }
+}
